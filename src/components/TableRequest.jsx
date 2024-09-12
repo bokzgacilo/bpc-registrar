@@ -8,19 +8,6 @@ export default function TableRequest() {
   const [DocumentType, SetDocumentType] = useState("")
   const navigate = useNavigate()
 
-  const dateFormatter = (date) => {
-    const Datee = new Date(date);
-
-    // Format both date and time
-    const formattedDateTime = Datee.toLocaleString('en-US', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
-    });
-    
-    return formattedDateTime;
-  }
-
   const handleFilterDocumentType = async (e) => {
     SetDocumentType(e.target.value)
 
@@ -48,7 +35,7 @@ export default function TableRequest() {
       <Heading size='md'>Requests</Heading>
       <HStack spacing={0} justifyContent='space-between'>
         <Flex flexDirection='row' alignItems='center' gap={4}>
-          <Heading Heading size='sm'>Filter</Heading>
+          <Heading size='sm'>Filter</Heading>
           <Select
             size='sm'
             value={DocumentType}
@@ -60,7 +47,7 @@ export default function TableRequest() {
           </Select>
         </Flex>
         <Flex flexDirection='row' alignItems='center' gap={2}>
-          <Heading Heading size='sm'>Search</Heading>
+          <Heading size='sm'>Search</Heading>
           <Input size='sm' placeholder='Search name, id, document' />
           <Button size='sm'>Go</Button>
         </Flex>

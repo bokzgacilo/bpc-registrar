@@ -1,10 +1,8 @@
 import { Button, Container, Flex, Grid, Heading, Image, SimpleGrid, Stack } from "@chakra-ui/react";
-import TableRequest from "../components/TableRequest";
-import { Outlet, Route, Routes, useNavigate } from "react-router-dom";
-import ViewRequest from "./ViewRequest";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-export default function Registrar({session}) {
+export default function Registrar() {
   const navigate = useNavigate()
 
   useEffect(() => {

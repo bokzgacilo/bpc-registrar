@@ -8,19 +8,6 @@ export default function TableReleased() {
   const [DocumentType, SetDocumentType] = useState("")
   const navigate = useNavigate()
 
-  const dateFormatter = (date) => {
-    const Datee = new Date(date);
-
-    // Format both date and time
-    const formattedDateTime = Datee.toLocaleString('en-US', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
-    });
-    
-    return formattedDateTime;
-  }
-
   const handleFilterDocumentType = async (e) => {
     SetDocumentType(e.target.value)
 

@@ -1,4 +1,4 @@
-import { Container, Flex, Stack, Heading, Avatar, Button, Image, useDisclosure, ModalOverlay, Modal, ModalContent, ModalHeader, ModalCloseButton, ModalBody, Text, Input, FormControl, FormLabel, Select, ModalFooter, Stepper, Step, StepIndicator, StepStatus, StepIcon, StepNumber, StepSeparator, Box, StepTitle, useSteps, AlertDialog, Center, Spinner, AlertDialogOverlay, AlertDialogBody, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, useToast, TableContainer, Table, Thead, Tbody, Th, Tr, Td } from "@chakra-ui/react";
+import { Container, Flex, Stack, Heading, Button, Image, useDisclosure, ModalOverlay, Modal, ModalContent, ModalHeader, ModalCloseButton, ModalBody, Text, Input, FormControl, FormLabel, Select, ModalFooter, Stepper, Step, StepIndicator, StepStatus, StepIcon, StepNumber, StepSeparator, Box, StepTitle, useSteps, AlertDialog, Center, Spinner, AlertDialogOverlay, AlertDialogBody, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, useToast, TableContainer, Table, Thead, Tbody, Th, Tr, Td } from "@chakra-ui/react";
 import { supabase } from "../supabase";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -16,13 +16,11 @@ export default function Client({onLogout}) {
   const [CurrentUserID, SetCurrentUserID] = useState("")
   const [Loading, SetLoading] = useState(false)
   const [SelectedProgram, SetSelectedProgram] = useState("");
+
   const [isGraduate, SetIsGraduate] = useState(true)
   const [step, SetStep] = useState(0);
   const navigate = useNavigate()
-  const { activeStep } = useSteps({
-    index: 0,
-    count: steps.length,
-  })
+
   const [MyRequest, SetMyRequest] = useState([])
 
   const handleProgramChange = (event) => {
@@ -50,7 +48,7 @@ export default function Client({onLogout}) {
   const handleSubmit = async () => {
     onOpen2()
 
-    const { data, error } = await supabase
+    const { error } = await supabase
     .from('request')
     .insert([
       {
@@ -77,7 +75,7 @@ export default function Client({onLogout}) {
     } else {
       console.log('Data inserted successfully');
 
-      const response = await fetch('http://localhost/registrar/send-email.php', {
+      await fetch('http://localhost/registrar/send-email.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -114,12 +112,11 @@ export default function Client({onLogout}) {
 
   useEffect(() => {
     const checkSession = async () => {
-      const { data, error } = await supabase.auth.getSession();
+      const { data } = await supabase.auth.getSession();
 
       if (data?.session) {
         setSession(data.session); // Set session if user is signed in
       } else {
-        // If no session, redirect to login page
         navigate('/login');
       }
     };

@@ -15,7 +15,7 @@ export default function ClientLogin () {
 
   useEffect(() => {
     const checkSession = async () => {
-      const { data, error } = await supabase.auth.getSession();
+      const { data } = await supabase.auth.getSession();
 
       if (data?.session) {
         setSession(data.session); // Set session if user is signed in
